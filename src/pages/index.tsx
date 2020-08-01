@@ -6,6 +6,8 @@ import SEO from '../components/seo';
 import { Author, Authors } from '../../content/authors/authors';
 import TopNavigationBar from '../components/TopNavigationBar/TopNavigationBar';
 import { useRef } from 'react';
+import usacoLogo from '../assets/usaco_logo.png';
+import professorDean from '../../content/authors/images/briancdean.jpg';
 
 const AuthorCard = ({
   author,
@@ -133,12 +135,12 @@ export default function IndexPage(props: PageProps) {
   return (
     <Layout>
       <SEO title={null} />
-      {/*<a*/}
-      {/*  href="http://usaco.org/"*/}
-      {/*  className="block text-base font-medium text-center text-white bg-blue-600 py-2"*/}
-      {/*>*/}
-      {/*  &larr; Back to usaco.org*/}
-      {/*</a>*/}
+      <a
+        href="http://usaco.org/"
+        className="block text-base font-medium text-center text-white bg-blue-600 py-2"
+      >
+        &larr; Back to usaco.org
+      </a>
       <TopNavigationBar indexPage />
 
       {/* Begin Hero */}
@@ -170,13 +172,13 @@ export default function IndexPage(props: PageProps) {
                 />
               </pattern>
             </defs>
-            <rect
-              y="0"
-              width="640"
-              height="640"
-              className="text-gray-50"
-              fill="currentColor"
-            />
+            {/*<rect*/}
+            {/*  y="0"*/}
+            {/*  width="640"*/}
+            {/*  height="640"*/}
+            {/*  className="text-gray-50"*/}
+            {/*  fill="currentColor"*/}
+            {/*/>*/}
             <rect
               x="118"
               width="404"
@@ -197,8 +199,9 @@ export default function IndexPage(props: PageProps) {
                   USACO <span className="text-blue-600">Guide</span>
                 </h2>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                  A free collection of <b>curated, high-quality resources</b> to
-                  take you from Bronze to Platinum and beyond.
+                  An official collection of{' '}
+                  <b>curated, high-quality resources</b> to take you from Bronze
+                  to Platinum and beyond.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
@@ -302,6 +305,87 @@ export default function IndexPage(props: PageProps) {
         </div>
       </div>
       {/* End Hero */}
+
+      <section className="py-12 bg-gray-50 overflow-hidden md:py-20 lg:py-24">
+        <div className="relative max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <svg
+            className="absolute top-full right-full transform translate-x-1/3 -translate-y-1/4 lg:translate-x-1/2 xl:-translate-y-1/2"
+            width="404"
+            height="404"
+            fill="none"
+            viewBox="0 0 404 404"
+            role="img"
+            aria-labelledby="svg-workcation"
+          >
+            <title id="svg-workcation">Workcation</title>
+            <defs>
+              <pattern
+                id="ad119f34-7694-4c31-947f-5c9d249b21f3"
+                x="0"
+                y="0"
+                width="20"
+                height="20"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="4"
+                  height="4"
+                  className="text-gray-200"
+                  fill="currentColor"
+                />
+              </pattern>
+            </defs>
+            <rect
+              width="404"
+              height="404"
+              fill="url(#ad119f34-7694-4c31-947f-5c9d249b21f3)"
+            />
+          </svg>
+
+          <div className="relative">
+            <img src={usacoLogo} className="max-w-full mx-auto" />
+            <blockquote className="mt-8">
+              <div className="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900">
+                <p>
+                  &ldquo;Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Nemo expedita voluptas culpa sapiente alias molestiae.
+                  Numquam corrupti in laborum sed rerum et corporis.&rdquo;
+                </p>
+              </div>
+              <footer className="mt-8">
+                <div className="md:flex md:items-center md:justify-center">
+                  <div className="md:flex-shrink-0">
+                    <img
+                      className="mx-auto h-10 w-10 rounded-full object-cover"
+                      src={professorDean}
+                      alt=""
+                    />
+                  </div>
+                  <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
+                    <div className="text-base leading-6 font-medium text-gray-900">
+                      Professor Brian C. Dean
+                    </div>
+
+                    <svg
+                      className="hidden md:block mx-1 h-5 w-5 text-indigo-600"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M11 0h3L9 20H6l5-20z" />
+                    </svg>
+
+                    <div className="text-base leading-6 font-medium text-gray-500">
+                      Director, USA Computing Olympiad
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
 
       <div className="py-12 bg-white" id="learn-more" ref={learnMoreRef}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
