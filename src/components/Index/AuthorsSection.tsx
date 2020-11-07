@@ -80,7 +80,7 @@ const AuthorCard = ({
     <div
       className={`py-8 sm:py-12 lg:py-8 px-4 sm:flex sm:flex-col xl:py-16 sm:px-8 border border-blue-900 dark:border-gray-700`}
     >
-      <blockquote className="sm:flex-grow sm:flex sm:items-center text-center sm:text-left max-w-sm sm:max-w-3xl mx-auto w-full">
+      <div className="sm:flex-grow sm:flex sm:items-center text-center sm:text-left max-w-sm sm:max-w-3xl mx-auto w-full">
         <div className="flex-shrink-0">
           <div
             className={`inline-flex rounded-full border-2 border-white dark:border-gray-200`}
@@ -122,7 +122,7 @@ const AuthorCard = ({
               ))}
           </div>
         </div>
-      </blockquote>
+      </div>
     </div>
   );
 };
@@ -164,6 +164,21 @@ export default function AuthorsSection() {
             }
           />
         ))}
+        <div
+          className={`py-8 sm:py-12 lg:py-8 px-4 xl:py-16 sm:px-8 border border-blue-900 dark:border-gray-700 flex items-center text-center justify-center`}
+        >
+          <p className="sm:text-lg md:text-xl">
+            We're always looking for more contributors! Check out{' '}
+            <a
+              className="text-blue-600 dark:text-blue-400"
+              target="_blank"
+              href="https://github.com/cpinitiative/usaco-guide/"
+            >
+              our Github repository
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </section>
   );

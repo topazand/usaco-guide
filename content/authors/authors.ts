@@ -99,4 +99,14 @@ export const Authors: Author[] = [
     github: 'andrewwangva',
     email: 'andrewwangva@gmail.com',
   },
+  {
+    photo: 'Andrew',
+    name: 'Jeffrey Meng',
+    title: 'Webmaster',
+    blurb:
+      'Andrew Wang is a USACO competitor who competes in multiple languages fluently.',
+    codeforces: 'a.wang',
+    github: 'andrewwangva',
+    email: 'andrewwangva@gmail.com',
+  },
 ];
