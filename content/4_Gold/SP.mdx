@@ -186,6 +186,19 @@ Used as the first step of the following:
 
 <FocusProblem problem={problems.sample[0]} />
 
+[Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) finds the single source shortest path on a graph **without** negative weights.
+We begin from the source source, and set the distances to all nodes except the starting one to infinite. 
+We maintain one set of nodes marked as *open* and the other set marked as *closed*. Initially, all nodes are in the open set except the source node.
+When a node enters the closed set, its distance to the source is fixed and can be proven to be the minimal distance. The algorithm will also process all edges starting at that node. 
+If an edge starting from that node $u$ can reduce the distance to another node $v$, or 
+$$ 
+	d[u]+w[u][v]<d[v], 
+$$
+where $w[u][v]$ is the weight of the edge connecting u and v, node v will also enter the closed set. At each iteration, the algorithm would process one unprocessed node $v$ that has entered the closed set which has the lowest distance to a processed node, or a node with $min(w[u][v])$.
+
+Furthermore, we can use a [priority queue](https://usaco.guide/silver/intro-ordered/#priority-queues) that sorts nodes based on their distances to efficiently find the unprocessed minimum distance node. This allows us to determine the next node to process in $\mathcal{O}(\log N)$ time, where $N$ is the number of nodes.
+The time complexity of the resulting algorithm is $\mathcal{O}((M+N) \log N)$, where M is the number of edge. Since we can assume that for most cases $M > N$, the final time complexity is $\mathcal{O}(M \log N)$.
+
 ### $\mathcal{O}(N^2)$
 
 The USACO training pages present a $\mathcal{O}(N^2)$ implementation, although this is rarely used nowadays.
@@ -275,6 +288,16 @@ int main() {
 }
 ```
 
+<Warning>
+
+It's important to include `continue`. This ensures that when all edge weights are non-negative, we will never go through the adjacency list of any vertex more than once. Removing it will cause TLE on the last test case of the above problem! 
+
+The last test case contains 100000 destinations and 149997 flights. City 1 has flights to cities 2 through 50000. Cities 2 through 50000 have flights to city 50001. City 50001 has flights to cities 50002 through 100000. Without the `continue`, after the program pops cities 1 through 50000 off the queue, the priority queue will contain 49999 routes that end at city 50001. Every one of the 49999 times city 50001 is popped off the queue and processed, we must iterate over all of its outgoing flights (to cities 50002 through 100000). This results in a runtime of $\Theta(N^2\log N)$, which will TLE. 
+
+On the other hand, if we did include the `continue`, the program will never iterate through the adjacency list of city 50001 after processing it for the first time.
+
+</Warning>
+
 </CPPSection>
 
 <JavaSection>
@@ -352,10 +375,6 @@ public class test {
 }
 ```
 
-</JavaSection>
-
-</LanguageSection>
-
 <Warning>
 
 It's important to include `continue`. This ensures that when all edge weights are non-negative, we will never go through the adjacency list of any vertex more than once. Removing it will cause TLE on the last test case of the above problem! 
@@ -365,6 +384,49 @@ The last test case contains 100000 destinations and 149997 flights. City 1 has f
 On the other hand, if we did include the `continue`, the program will never iterate through the adjacency list of city 50001 after processing it for the first time.
 
 </Warning>
+
+</JavaSection>
+
+<PySection>
+
+```python
+import queue
+
+def dijkstra(s):  # s is the source
+    # set all distances to infinity except s
+    dist = [float('inf') for _ in range(n+1)]
+    visit = [False for _ in range(n+1)]
+    dist[s] = 0
+    q = queue.PriorityQueue()
+    q.put((0, s))
+    while not q.empty():
+        di, u = q.get()
+        if visit[u]:
+            continue
+        visit[u] = True
+        for v, w in edges[u]:
+            if dist[u]+w < dist[v]:
+                dist[v] = dist[u]+w  # Update the distance and
+                # Push the new node into the priority queue if we can reach v faster
+                q.put((w, v))
+    return dist
+
+n, m = list(map(int, input().split()))
+edges = [[] for _ in range(n+1)]
+
+for i in range(m):
+    a, b, c = list(map(int, input().split()))
+    edges[a].append([b, c])
+for i in dijkstra(1):
+    if i != float('inf'):
+        print(i, end=" ")
+```
+
+Unfortunately, Python is too slow to pass all the test cases, but the implementation is correct.
+
+</PySection>
+
+</LanguageSection>
 
 <Optional title="Faster Dijkstra">
 
